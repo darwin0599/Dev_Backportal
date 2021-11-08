@@ -150,7 +150,7 @@ public class InitAction extends ActionUtil{
 	}
 	
 	public LightData initSessionLigth() {
-		final String FIELD_NAME = "Inicio Sesion";
+		final String FIELD_NAME = "Inicio Sesión";
 		try {
 			if(this.model.getInitSession() == null) {
 				CustomerBackOfficeResponseTO response = this.delegate.customerExtraData(this.request);
@@ -166,7 +166,7 @@ public class InitAction extends ActionUtil{
 	}
 	
 	public LightData habitTrxLight() {
-		final String FIELD_NAME = "Habito Trx";
+		final String FIELD_NAME = "Hábito Trx";
 		try {
 			if(this.model.getHabitTrx() == null) {
 				CustomerBackOfficeResponseTO response = this.delegate.customerExtraData(this.request);
@@ -211,9 +211,9 @@ public class InitAction extends ActionUtil{
 		}
 		return this.model.getLockedForLogonAttemps();
 	}
-	
+	 
 	public LightData actualLoggedLight() {
-		final String FIELD_NAME = "Logueado Actual";
+		final String FIELD_NAME = "Login Actual";
 		try {
 			if(this.model.getActualLogged() == null) {
 				CustomerBackOfficeResponseTO response = this.delegate.customerExtraData(null);
