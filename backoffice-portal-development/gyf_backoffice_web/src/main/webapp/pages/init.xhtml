@@ -379,8 +379,11 @@ radicaciones de tarjeta crédito realizadas por el cliente consultado. -->
 						size="40"></p:inputText>
 				</h:panelGrid>
 				<div style="display: block; width: 100%; text-align: center;">
-					<p:commandButton value="Consultar" update=":pgContainer idMpCustomerDataSBI" 
-						actionListener="#{initAction.saveIdCustomerData()}" />
+					<!-- Se cambió el valor del botón de Guardar a Consultar-->
+					<p:commandButton value="Consultar" update=":pgContainer idMpCustomerDataSBI"
+									 actionListener="#{initAction.saveIdCustomerData()}" />
+					<!-- Se creó el botón Salir -->
+					<p:commandButton> value="Salir" action="#{initAction.toReport(0)"</p:commandButton>
 				</div>
 			</p:dialog>
 			
@@ -395,10 +398,19 @@ radicaciones de tarjeta crédito realizadas por el cliente consultado. -->
 					actionListener="#{initAction.putOtpCode()}"></p:commandButton>	
 				</h:panelGroup>
 				
-			</p:dialog id="idClienteNoExiste" widgetVar>
-			
-			<p:dialog>
-				
+			</p:dialog>
+
+			<p:dialog id="idClientDoesNExist" widgetVar="clientDoesNExist" modal="true" resizable="false" closable="true">
+				<h:panelGroup layout="block" style="text-align: center;">
+					<h:outputLabel value="Cliente no existe. Seleccione el botón SI para consultar otro cliente, o el botón NO para retornar a la página principal de SBI."></h:outputLabel>
+					<h:panelGrid columns="2">
+						<div style="display: block; width: 100%;">
+							<p:commandButton value="SI" type="button"
+											 onclick="PF('mpCustomerDataSBI').show();"></p:commandButton>
+							<p:commandButton value="NO" action="#{initAction.toReport(0)" ></p:commandButton>
+						</div>
+					</h:panelGrid>
+				</h:panelGroup>
 			</p:dialog>
 			
 			<div style="visibility: hidden;">

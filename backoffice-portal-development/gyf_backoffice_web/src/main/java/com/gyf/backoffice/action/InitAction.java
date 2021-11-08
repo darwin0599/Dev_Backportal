@@ -594,11 +594,11 @@ public class InitAction extends ActionUtil{
 			}
 			this.request.setId(this.model.getDocumentNumber());
 			this.request.setIdType(this.model.getDocumentType());
-			if(!clientExist()){
-				
-			}
 			this.model.setLoadContent(true);
 			RequestContext.getCurrentInstance().execute("PF('mpCustomerDataSBI').hide();");
+			if(!clientExist()){
+				RequestContext.getCurrentInstance().execute("PF('clientDoesNExist').show();");
+			}
 		}catch (Exception e) {
 			this.model.setLoadContent(false);
 			FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Error", getErrorMsg(e));
@@ -607,16 +607,9 @@ public class InitAction extends ActionUtil{
 		}
 	}
 	
-	public boolean clientExist() {
-		CustomerBackOfficeResponseTO response = null;	
-		try {
-			response = this.delegate.registredAndComplianceList(this.request);
-		}catch(Exception e) {
-			this.model.setLoadContent(false);
-			
-		}
-		
-		return (response.equals(null)? false : response.isRegistredFlag());
+	public boolean clientExist() throws Exception{
+		CustomerBackOfficeResponseTO response = this.delegate.registredAndComplianceList(this.request);
+		return response.isRegistredFlag();
 	}
 	
 	public void initDocTypeList() throws Exception {
