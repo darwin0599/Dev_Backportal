@@ -1,0 +1,70 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<groupId>com.gyf.backoffice</groupId>
+	<artifactId>backoffice-portal-pom</artifactId>
+	<version>1.0.0</version>
+	<packaging>pom</packaging>
+	<name>backoffice portal POM</name>
+	<description>Parent maven project for backoffice portal</description>
+
+	<properties>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+	</properties>
+
+	<dependencies>
+		<dependency>
+			<groupId>com.arkangroup.legacy</groupId>
+			<artifactId>legacy.toolsgenericos</artifactId>
+			<version>1.0.2</version>
+		</dependency>
+		<dependency>
+			<groupId>log4j</groupId>
+			<artifactId>log4j</artifactId>
+			<version>1.2.17</version>
+		</dependency>
+		<dependency>
+			<groupId>commons-codec</groupId>
+			<artifactId>commons-codec</artifactId>
+			<version>1.6</version>
+		</dependency>
+		<dependency>
+			<groupId>commons-io</groupId>
+			<artifactId>commons-io</artifactId>
+			<version>2.4</version>
+		</dependency>
+		<dependency>
+		    <groupId>commons-lang</groupId>
+		    <artifactId>commons-lang</artifactId>
+		    <version>2.6</version>
+		</dependency>
+	</dependencies>
+
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<version>3.2</version>
+				<configuration>
+					<source>1.6</source>
+					<target>1.6</target>
+				</configuration>
+			</plugin>
+		</plugins>
+	</build>
+
+	<modules>
+		<module>gyf_portal_backoffice_model</module>
+		<module>gyf_portal_backoffice_persistence</module>
+		<module>gyf_portal_backoffice_client_customer_prod</module>
+		<module>gyf_portal_backoffice_client</module>
+		<module>gyf_portal_backoffice_ng_ear</module>
+		<module>gyf_portal_backoffice_business</module>
+		<module>gyf_portal_backoffice_audit</module>
+		<module>gyf_backoffice_web</module>
+		<module>gyf_portal_backoffice_presentation_ear</module>
+	</modules>
+</project>

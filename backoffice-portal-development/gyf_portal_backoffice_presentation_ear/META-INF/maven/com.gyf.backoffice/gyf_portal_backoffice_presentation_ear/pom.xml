@@ -1,0 +1,157 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <parent>
+    <groupId>com.gyf.backoffice</groupId>
+    <artifactId>backoffice-portal-pom</artifactId>
+    <version>1.0.0</version>
+  </parent>
+  <artifactId>gyf_portal_backoffice_presentation_ear</artifactId>
+  <packaging>ear</packaging>
+  
+  <dependencies>
+  	<dependency>
+  		<groupId>com.gyf.backoffice</groupId>
+		<artifactId>gyf_backoffice_web</artifactId>
+		<version>1.0.0</version>
+		<type>war</type>
+  	</dependency>
+  
+  	<dependency>
+		<groupId>com.gyf.backoffice</groupId>
+		<artifactId>gyf_portal_backoffice_model</artifactId>
+		<version>1.0.0</version>
+		<scope>runtime</scope>
+	</dependency>		
+	
+	<dependency>
+		<groupId>com.arkangroup.legacy</groupId>
+		<artifactId>legacy.tools.genericos.presentacion</artifactId>
+		<version>1.0.0</version>
+		<scope>runtime</scope>
+	</dependency>
+	
+	<dependency>
+		<groupId>com.arkan.pgi</groupId>
+		<artifactId>gyf_autenticacion_sbi</artifactId>
+		<version>0.0.1</version>
+		<scope>runtime</scope>
+	</dependency>
+	
+	<dependency>
+		<groupId>com.arkangroup.legacy</groupId>
+		<artifactId>legacy.gyfautenticacionsiif</artifactId>
+		<version>1.0.0</version>
+		<scope>runtime</scope>
+	</dependency>
+	
+	<dependency>
+		<groupId>com.arkangroup.legacy</groupId>
+		<artifactId>legacy.header.validate.client</artifactId>
+		<version>1.0.0</version>
+		<scope>runtime</scope>
+	</dependency>
+	
+	<dependency>
+		<groupId>com.arkangroup.commons</groupId>
+		<artifactId>commons.elementos.soporte.model</artifactId>
+		<version>1.0.0</version>
+		<scope>runtime</scope>
+	</dependency>
+
+	<dependency>
+		<groupId>com.arkangroup.commons</groupId>
+		<artifactId>commons.elementos.soporte</artifactId>
+		<version>1.0.0</version>
+		<scope>runtime</scope>
+	</dependency>
+	
+	<dependency>
+		<groupId>javax.servlet</groupId>
+		<artifactId>javax.servlet-api</artifactId>
+		<version>3.1.0</version>
+		<scope>runtime</scope>
+	</dependency>
+	
+	<dependency>
+		<groupId>javax.faces</groupId>
+		<artifactId>javax.faces-api</artifactId>
+		<version>2.1</version>
+		<scope>runtime</scope>
+	</dependency>
+	
+	<dependency>
+		<groupId>org.primefaces</groupId>
+		<artifactId>primefaces</artifactId>
+		<version>6.1</version>
+		<scope>runtime</scope>
+	</dependency>
+		
+	<dependency>
+		<groupId>com.arkangroup.legacy</groupId>
+		<artifactId>legacy.webservices-rt</artifactId>
+		<version>1.0.0</version>
+		<scope>runtime</scope>
+	</dependency>
+	
+	<dependency>
+		<groupId>com.arkangroup.legacy</groupId>
+		<artifactId>legacy.webservices-extra</artifactId>
+		<version>1.0.0</version>
+		<scope>runtime</scope>
+	</dependency>
+	
+	
+	<dependency>
+		<groupId>com.arkangroup.legacy</groupId>
+		<artifactId>legacy.webservices-extra-api</artifactId>
+		<version>1.0.0</version>
+		<scope>runtime</scope>
+	</dependency>
+	
+	
+	<dependency>
+		<groupId>com.arkangroup.legacy</groupId>
+		<artifactId>legacy.webservices-api</artifactId>
+		<version>1.0.0</version>
+		<scope>runtime</scope>
+	</dependency>
+		
+  </dependencies>
+  
+  <build>
+  	<plugins>
+  		<plugin>
+  			<artifactId>maven-ear-plugin</artifactId>
+			<version>2.10</version>
+			<configuration>
+					<earSourceDirectory>EarContent</earSourceDirectory>
+					<version>6</version>
+					<defaultLibBundleDir>lib</defaultLibBundleDir>
+					<finalName>gyf_portal_backoffice_presentation_ear</finalName>
+					<modules>
+						<webModule>
+							<groupId>com.gyf.backoffice</groupId>
+							<artifactId>gyf_backoffice_web</artifactId>
+							<bundleFileName>gyf_backoffice_web.war</bundleFileName>
+						</webModule>
+						<jarModule>
+							<groupId>com.arkangroup.legacy</groupId>
+							<artifactId>legacy.webservices-extra</artifactId>
+							<bundleFileName>webservices-extra-api.jar</bundleFileName>
+						</jarModule>
+						<jarModule>
+							<groupId>com.arkangroup.legacy</groupId>
+							<artifactId>legacy.webservices-api</artifactId>
+							<bundleFileName>webservices-api.jar</bundleFileName>
+						</jarModule>
+						<jarModule>
+							<groupId>com.arkangroup.legacy</groupId>
+							<artifactId>legacy.webservices-extra</artifactId>
+							<bundleFileName>webservices-extra.jar</bundleFileName>
+						</jarModule>
+					</modules>
+				</configuration>
+  		</plugin>
+  	</plugins>
+  </build>
+</project>

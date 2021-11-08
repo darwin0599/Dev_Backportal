@@ -1,0 +1,126 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<parent>
+		<groupId>com.gyf.backoffice</groupId>
+		<artifactId>backoffice-portal-pom</artifactId>
+		<version>1.0.0</version>
+	</parent>
+	<artifactId>gyf_portal_backoffice_ng_ear</artifactId>
+	<packaging>ear</packaging>
+
+	<dependencies>
+	
+		<dependency>
+			<groupId>com.gyf.backoffice</groupId>
+			<artifactId>gyf_portal_backoffice_audit</artifactId>
+			<version>1.0.0</version>
+			<type>ejb</type>
+		</dependency>
+
+		<dependency>
+			<groupId>com.gyf.backoffice</groupId>
+			<artifactId>gyf_portal_backoffice_business</artifactId>
+			<version>1.0.0</version>
+			<type>ejb</type>
+		</dependency>
+
+		<dependency>
+			<groupId>com.gyf.backoffice</groupId>
+			<artifactId>gyf_portal_backoffice_model</artifactId>
+			<version>1.0.0</version>
+		</dependency>
+
+		<dependency>
+			<groupId>com.gyf.backoffice</groupId>
+			<artifactId>gyf_portal_backoffice_persistence</artifactId>
+			<version>1.0.0</version>
+		</dependency>
+
+		<dependency>
+			<groupId>com.gyf.backoffice</groupId>
+			<artifactId>gyf_portal_backoffice_client_customer_prod</artifactId>
+			<version>1.0.0</version>
+		</dependency>
+
+		<dependency>
+			<groupId>com.gyf.backoffice</groupId>
+			<artifactId>gyf_portal_backoffice_client</artifactId>
+			<version>1.0.0</version>
+		</dependency>
+
+		<dependency>
+			<groupId>javax.ejb</groupId>
+			<artifactId>javax.ejb-api</artifactId>
+			<version>3.2</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.aspectj</groupId>
+			<artifactId>aspectjrt</artifactId>
+			<version>1.6.6</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.aspectj</groupId>
+			<artifactId>aspectjtools</artifactId>
+			<version>1.6.2</version>
+		</dependency>
+		
+		<dependency>
+			<groupId>com.arkangroup.legacy</groupId>
+			<artifactId>legacy.webservices-rt</artifactId>
+			<version>1.0.0</version>
+		</dependency>
+		
+		<dependency>
+			<groupId>com.arkangroup.legacy</groupId>
+			<artifactId>legacy.webservices-extra</artifactId>
+			<version>1.0.0</version>
+		</dependency>
+		
+		
+		<dependency>
+			<groupId>com.arkangroup.legacy</groupId>
+			<artifactId>legacy.webservices-extra-api</artifactId>
+			<version>1.0.0</version>
+		</dependency>
+		
+		
+		<dependency>
+			<groupId>com.arkangroup.legacy</groupId>
+			<artifactId>legacy.webservices-api</artifactId>
+			<version>1.0.0</version>
+		</dependency>
+		
+	</dependencies>
+
+	<build>
+		<plugins>
+			<plugin>
+				<artifactId>maven-ear-plugin</artifactId>
+				<version>2.10</version>
+				<configuration>
+					<earSourceDirectory>EarContent</earSourceDirectory>
+					<version>6</version>
+					<defaultLibBundleDir>lib</defaultLibBundleDir>
+					<finalName>gyf_portal_backoffice_ng_ear</finalName>
+					<modules>
+						<ejbModule>
+							<groupId>com.gyf.backoffice</groupId>
+							<artifactId>gyf_portal_backoffice_audit</artifactId>
+							<bundleFileName>gyf_portal_backoffice_audit.jar</bundleFileName>
+						</ejbModule>
+						<ejbModule>
+							<groupId>com.gyf.backoffice</groupId>
+							<artifactId>gyf_portal_backoffice_business</artifactId>
+							<bundleFileName>gyf_portal_backoffice_business.jar</bundleFileName>
+						</ejbModule>
+					</modules>
+				</configuration>
+			</plugin>
+		</plugins>
+	</build>
+
+</project>

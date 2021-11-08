@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="CompilerConfiguration">
+    <annotationProcessing>
+      <profile name="Maven default annotation processors profile" enabled="true">
+        <sourceOutputDir name="target/generated-sources/annotations" />
+        <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
+        <outputRelativeToContentRoot value="true" />
+        <module name="gyf_portal_backoffice_model" />
+        <module name="gyf_portal_backoffice_presentation_ear" />
+        <module name="gyf_portal_backoffice_persistence" />
+        <module name="gyf_portal_backoffice_audit" />
+        <module name="gyf_backoffice_web" />
+        <module name="gyf_portal_backoffice_business" />
+        <module name="gyf_portal_backoffice_client_customer_prod" />
+        <module name="gyf_portal_backoffice_client" />
+        <module name="gyf_portal_backoffice_ng_ear" />
+      </profile>
+    </annotationProcessing>
+    <bytecodeTargetLevel target="6" />
+  </component>
+</project>

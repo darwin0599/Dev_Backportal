@@ -1,0 +1,31 @@
+package com.gyf.backoffice.constants;
+
+public enum CreditCardStatus {
+
+	SOLINI("SOLICITUD INICIAL"),
+	PAPSOL("PREAPROBADO SOLICITUD"),
+	PAPFAC("PREAPROBADO FABRICA DE CREDITO"),
+	NEGADO("NEGADO"),
+	ZOGRIS("ZONA GRIS"),
+	NVAFONL("NO SE PUDO VALIDAR ANTIFRAUDE ONLINE"),
+	APRATI("APROBADO ATILA"),
+	NEGATI("NEGADO ATILA"),
+	APRSGB("APROBADO SEGURIDAD BANCARIA"),
+	NEGSGB("NEGADO SEGURIDAD BANCARIA"),
+	APROBADA("APROBADA"),
+	PNDENTREGA("PENDIENTE DE ENTREGA"),
+	ENTREGADA("ENTREGADA"),
+	DESISTIDO("DESISTIDO"),
+	NOCONT("NO SE PUDO CONTACTAR");
+	
+	private String value;
+	
+	private CreditCardStatus(String value) {
+		this.value = value;
+	}
+	
+	public String getValue() {
+		return this.value;
+	}
+	
+}

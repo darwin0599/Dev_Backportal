@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns="http://java.sun.com/xml/ns/javaee"
+	xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd"
+	id="WebApp_ID" version="3.0">
+	<display-name>gyf_backoffice_web</display-name>
+	<welcome-file-list>
+		<welcome-file>index.jsp</welcome-file>
+	</welcome-file-list>
+	<servlet>
+		<servlet-name>Faces Servlet</servlet-name>
+		<servlet-class>javax.faces.webapp.FacesServlet</servlet-class>
+		<load-on-startup>1</load-on-startup>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>Faces Servlet</servlet-name>
+		<url-pattern>*.faces</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>Faces Servlet</servlet-name>
+		<url-pattern>*.xhtml</url-pattern>
+	</servlet-mapping>
+	
+	<filter>
+		<filter-name>IECompatibleFilter</filter-name>
+		<filter-class>com.gyf.backoffice.filters.IECompatibleFilter</filter-class>
+	</filter>
+	<filter-mapping>
+		<filter-name>IECompatibleFilter</filter-name>
+		<url-pattern>/*</url-pattern>
+	</filter-mapping>	
+
+	<filter>
+		<filter-name>logout</filter-name>
+		<filter-class>com.gyf.backoffice.filters.LogoutSessionFilter</filter-class>
+	</filter>
+
+	<filter-mapping>
+		<filter-name>logout</filter-name>
+		<url-pattern>/logout/*</url-pattern>
+	</filter-mapping>
+
+	<!-- Filtro validador de sesion -->
+
+	<filter>
+		<filter-name>validateSesion</filter-name>
+		<filter-class>com.gyf.tools.autenticacionsbi.filtro.ValidadorSesionFiltro</filter-class>
+	</filter>
+
+	<filter-mapping>
+		<filter-name>validateSesion</filter-name>
+		<url-pattern>/pages/*</url-pattern>
+	</filter-mapping>
+
+	<!-- Servlet para validación de sesión -->
+	<servlet>
+		<description>Servlet para validación de sesión SBI</description>
+		<servlet-name>Init</servlet-name>
+		<servlet-class>com.gyf.backoffice.servlets.Init</servlet-class>
+	</servlet>
+
+	<servlet>
+		<description>Servlet para validación de sesión SIIF</description>
+		<servlet-name>InitSiif</servlet-name>
+		<servlet-class>com.gyf.backoffice.servlets.InitSiif</servlet-class>
+	</servlet>
+
+	<servlet-mapping>
+		<servlet-name>Init</servlet-name>
+		<url-pattern>/Init</url-pattern>
+	</servlet-mapping>
+
+	<servlet-mapping>
+		<servlet-name>InitSiif</servlet-name>
+		<url-pattern>/InitSiif</url-pattern>
+	</servlet-mapping>
+
+	<context-param>
+		<param-name>javax.faces.STATE_SAVING_METHOD</param-name>
+		<param-value>client</param-value>
+	</context-param>
+
+</web-app>

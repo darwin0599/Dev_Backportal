@@ -1,0 +1,434 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+
+<h:head>
+	<h:outputStylesheet library="css" name="init.css" />
+	<h:outputScript library="js" name="helper.js" />
+	<script>
+		window.onload = function() {		
+			document.getElementById("boform:btn_log").click();
+		};
+	</script>
+</h:head>
+<h:body>
+	<p:ajaxStatus onstart="PF('statusDialog').show()" onsuccess="PF('statusDialog').hide()" />
+	<p:dialog modal="true" widgetVar="statusDialog" height="100px"
+		width="150px" draggable="false" closable="false" resizable="false"
+		styleClass="process_msg">
+		<h:graphicImage library="images" height="100px" width="100px"
+			name="loading.gif" />
+	</p:dialog>	
+			
+	<h:panelGroup id="pgContainer" styleClass="container" layout="block">
+		<h:form id="boform">
+		<p:growl id="growl" showDetail="true" sticky="true" />  
+		<div id="headerDesktop"></div>
+			<div id="header">
+				<div align="right">
+					<h:panelGrid columns="7">
+						
+						<h:outputLabel value="Cajero:" />
+						<h:outputText id="header_cashier"  value="#{sessionScope['CASHIER_IN_SESSION']}"/>
+						
+						<p:spacer width="10" />
+						
+						<h:outputLabel value="Punto de Servicio:" />
+						<h:outputText id="header_servicepoint" value="#{sessionScope['SERVICE_POINT']}"/>
+						
+						<p:spacer width="10" />
+						
+						<h:commandButton type="button" onclick="closeApp()" styleClass="boton_salir" />
+						
+					</h:panelGrid>
+				</div>
+			</div>
+			
+			<div id="leftside">
+				<h:panelGroup id="pgLightroom" layout="block" styleClass="lightroom" rendered="#{initAction.model.loadContent}">
+					<table>
+						<tr>
+							<td class="lightname"><h:outputText value="Registro Canal"></h:outputText>
+							</td>
+							<td class="light"><p:outputPanel deferred="true" 
+									deferredMode="load">
+									<h:graphicImage id="imgEmail" library="images"
+										name="#{initAction.emailLight().imageName}"
+										style="width: 2.8em; height: 2.8em;"></h:graphicImage>
+									<p:tooltip for="imgEmail"
+										value="#{initAction.emailLight().tooltip}"></p:tooltip>
+									<br />
+									<h:outputText value="#{initAction.emailLight().label}"></h:outputText>
+								</p:outputPanel></td>
+							<td class="light"><p:outputPanel deferred="true" 
+									autoUpdate="true" deferredMode="load">
+									<h:graphicImage id="imgCellphone" library="images"
+										name="#{initAction.cellphoneLight().imageName}"
+										style="width: 2.8em; height: 2.8em;"></h:graphicImage>
+									<p:tooltip for="imgCellphone"
+										value="#{initAction.cellphoneLight().tooltip}"></p:tooltip>
+									<br />
+									<h:outputText value="#{initAction.cellphoneLight().label}"></h:outputText>
+								</p:outputPanel></td>
+							<td class="light"><p:outputPanel deferred="true" 
+									deferredMode="load">
+									<h:graphicImage id="imgSuitable" library="images"
+										name="#{initAction.suitableForRegLight().imageName}"
+										style="width: 2.8em; height: 2.8em;"></h:graphicImage>
+									<p:tooltip for="imgSuitable"
+										value="#{initAction.suitableForRegLight().tooltip}"></p:tooltip>
+									<br />
+									<h:outputText value="#{initAction.suitableForRegLight().label}"></h:outputText>
+								</p:outputPanel></td>
+							<td class="light"><p:outputPanel deferred="true" 
+									deferredMode="load">
+									<h:graphicImage id="imgSarlaft" library="images"
+										name="#{initAction.sarlaftLight().imageName}"
+										style="width: 2.8em; height: 2.8em;"></h:graphicImage>
+									<p:tooltip for="imgSarlaft"
+										value="#{initAction.sarlaftLight().tooltip}"></p:tooltip>
+									<br />
+									<h:outputText value="#{initAction.sarlaftLight().label}"></h:outputText>
+								</p:outputPanel></td>
+						</tr>
+						<tr>
+							<td class="lightname"><h:outputText
+									value="Condiciones Canal"></h:outputText></td>
+							<td class="light"><p:outputPanel deferred="true" 
+									deferredMode="load">
+									<h:graphicImage id="imgRegistry" library="images"
+										name="#{initAction.registryLight().imageName}"
+										style="width: 2.8em; height: 2.8em;"></h:graphicImage>
+									<p:tooltip for="imgRegistry"
+										value="#{initAction.registryLight().tooltip}"></p:tooltip>
+									<br />
+									<h:outputText value="#{initAction.registryLight().label}"></h:outputText>
+								</p:outputPanel></td>
+							<td class="light"><p:outputPanel deferred="true" 
+									deferredMode="load">
+									<h:graphicImage id="imgInit" library="images"
+										name="#{initAction.initSessionLigth().imageName}"
+										style="width: 2.8em; height: 2.8em;"></h:graphicImage>
+									<p:tooltip for="imgInit"
+										value="#{initAction.initSessionLigth().tooltip}"></p:tooltip>
+									<br />
+									<h:outputText value="#{initAction.initSessionLigth().label}"></h:outputText>
+								</p:outputPanel></td>
+							<td class="light"><p:outputPanel deferred="true" 
+									deferredMode="load">
+									<h:graphicImage id="imgHabit" library="images"
+										name="#{initAction.habitTrxLight().imageName}"
+										style="width: 2.8em; height: 2.8em;"></h:graphicImage>
+									<p:tooltip for="imgHabit"
+										value="#{initAction.habitTrxLight().tooltip}"></p:tooltip>
+									<br />
+									<h:outputText value="#{initAction.habitTrxLight().label}"></h:outputText>
+								</p:outputPanel></td>
+							<td class="light"><p:outputPanel deferred="true" 
+									deferredMode="load">
+									<h:graphicImage id="imgSecurity" library="images"
+										name="#{initAction.securityQuestionsLight().imageName}"
+										style="width: 2.8em; height: 2.8em;"></h:graphicImage>
+									<p:tooltip for="imgSecurity"
+										value="#{initAction.securityQuestionsLight().tooltip}"></p:tooltip>
+									<br />
+									<h:outputText
+										value="#{initAction.securityQuestionsLight().label}"></h:outputText>
+								</p:outputPanel></td>
+						</tr>
+						<tr>
+							<td class="lightname"><h:outputText
+									value="Estado Actual Canal"></h:outputText></td>
+							<td class="light"><p:outputPanel deferred="true" 
+									deferredMode="load">
+									<h:graphicImage id="imgLogonAtt" library="images"
+										name="#{initAction.lockedForLogonAttempsLight().imageName}"
+										style="width: 2.8em; height: 2.8em;"></h:graphicImage>
+									<p:tooltip for="imgLogonAtt"
+										value="#{initAction.lockedForLogonAttempsLight().tooltip}"></p:tooltip>
+									<br />
+									<h:outputText
+										value="#{initAction.lockedForLogonAttempsLight().label}"></h:outputText>
+								</p:outputPanel></td>
+							<td class="light"><p:outputPanel deferred="true" 
+									deferredMode="load">
+									<h:graphicImage id="imgActual" library="images"
+										name="#{initAction.actualLoggedLight().imageName}"
+										style="width: 2.8em; height: 2.8em;"></h:graphicImage>
+									<p:tooltip for="imgActual"
+										value="#{initAction.actualLoggedLight().tooltip}"></p:tooltip>
+									<br />
+									<h:outputText value="#{initAction.actualLoggedLight().label}"></h:outputText>
+								</p:outputPanel></td>
+							<td class="light"><p:outputPanel deferred="true" 
+									deferredMode="load">
+									<h:graphicImage id="imgLockedAd" library="images"
+										name="#{initAction.lockedByAdminLight().imageName}"
+										style="width: 2.8em; height: 2.8em;"></h:graphicImage>
+									<p:tooltip for="imgLockedAd"
+										value="#{initAction.lockedByAdminLight().tooltip}"></p:tooltip>
+									<br />
+									<h:outputText value="#{initAction.lockedByAdminLight().label}"></h:outputText>
+								</p:outputPanel></td>
+						</tr>
+					</table>
+				</h:panelGroup>
+
+				<h:panelGroup id="pgMindmap" layout="block" styleClass="mindmap" rendered="#{initAction.model.loadContent}">
+					<!-- canvas id="mindmapcanvas" width="800" height="400"></canvas>
+					<script>
+						var imgName = "${resource['images/woman.png']}";
+						drawParentNode(imgName, "", "");
+					</script-->
+					<div id="beforeTable">
+						<table>
+							<tr>
+								<td>
+									<div class="cont_right">
+										<div class="opt_disabled">
+											<h:commandLink value="ENVIOS" disabled="true"></h:commandLink>
+										</div>
+									</div>
+	
+								</td>
+								<td>
+									<div class="cont_center">
+										<div class="opt_disabled">
+											<h:commandLink value="TRANSF" disabled="true"></h:commandLink>
+										</div>
+									</div>
+								</td>
+								<td>
+									<div class="cont_center">
+										<div class="opt_enabled">
+											<h:commandLink value="TC" action="#{initAction.toReport(4)}"></h:commandLink>
+										</div>
+									</div>
+								</td>
+								<td>
+									<div class="cont_center">
+										<div class="opt_disabled">
+											<h:commandLink value="SEG" disabled="true"></h:commandLink>
+										</div>
+									</div>
+								</td>
+								<td>
+									<div class="cont_left">
+										<div class="opt_disabled">
+											<h:commandLink value="REC" disabled="true"></h:commandLink>
+										</div>
+									</div>
+								</td>
+							</tr>
+	
+							<tr>
+								<td>
+									<div class="cont_right">
+										<div class="opt_disabled">
+											<h:commandLink value="PAGOS" disabled="true"></h:commandLink>
+										</div>
+									</div>
+								</td>
+								<td colspan="3" rowspan="3">
+									<div id="cont_customer">
+										<div id="customer_info">
+										<h:graphicImage library="images"
+												name="man.png" style="width: 7em; height: 7em"></h:graphicImage>
+											<br />
+												<p:outputPanel deferred="true" 
+													deferredMode="load">
+													<h:outputText value="#{initAction.emailLight().firstName.concat(' ').concat(initAction.emailLight().lastName)}"></h:outputText>
+												</p:outputPanel>
+											<br />
+											<h:outputText value="#{initAction.model.documentType.concat(' ').concat(initAction.model.documentNumber)}"></h:outputText>
+										</div>
+									</div>
+								</td>
+								<td>
+									<div class="cont_left">
+										<div class="opt_disabled">
+											<h:commandLink value="TOPES TRX" disabled="true"></h:commandLink>
+										</div>
+									</div>
+								</td>
+							</tr>
+	
+							<tr>
+								<td>
+									<div class="cont_right">
+										<div class="opt_enabled">
+											<h:commandLink value="PSE" action="#{initAction.toReport(3)}"></h:commandLink>
+										</div>
+									</div>
+								</td>
+								<td>
+									<div class="cont_left">
+										<div class="opt_enabled">
+											<h:commandLink value="CTAS" action="#{initAction.toReport(2)}"></h:commandLink>
+										</div>
+									</div>
+								</td>
+							</tr>
+	
+							<tr>
+								<td>
+									<div class="cont_right">
+										<div class="opt_enabled">
+											<h:commandLink value="360" action="#{initAction.toReport(1)}"></h:commandLink>
+										</div>
+									</div>
+								</td>
+								<td>
+									<div class="cont_left">
+										<div class="opt_disabled">
+											<h:commandLink value="EXT/CERT" disabled="true"></h:commandLink>
+										</div>
+									</div>
+								</td>
+							</tr>
+							
+<!-- CAMBIO I: Se requiere adicionar al tablero de control del Portal una nueva burbuja con el texto “TC”, para las solicitudes y
+radicaciones de tarjeta crédito realizadas por el cliente consultado. -->							
+
+							<tr>
+								<td>
+									<div class="cont_right">
+										<div class="opt_enabled">
+											<h:commandLink> value="TC" action="#{initAction.toReport(4)}"</h:commandLink>
+										</div>
+									</div>
+								</td>
+							</tr>	
+								
+<!-- CAMBIO F: Se requiere adicionar al tablero de control del Portal una nueva burbuja con el texto “TC”, para las solicitudes y
+radicaciones de tarjeta crédito realizadas por el cliente consultado. -->							
+							
+							
+						</table>
+					</div>
+				</h:panelGroup>
+			</div>
+			<h:panelGroup id="pgMenu" layout="block" styleClass="rightside" rendered="#{initAction.model.loadContent}">
+				<div class="menutittle">
+					<h:outputText value="Acciones"></h:outputText>
+				</div>
+				<div class="menuitem">
+					<h:commandLink value="" actionListener="#{initAction.sendOTPSMS()}" >
+						<f:ajax disabled="false"></f:ajax>
+						<h:graphicImage library="images" name="forwardphone.png"
+							style="width: 4em; height: 4em;"></h:graphicImage>
+					</h:commandLink>
+					<br />
+					<h:outputText value="Reenvio OTP"></h:outputText>
+				</div>
+				<div class="menuitem">
+					<h:commandLink value="" actionListener="#{initAction.sendOTPMail()}">
+						<f:ajax disabled="false"></f:ajax>
+						<h:graphicImage library="images" name="forwardmail.png"
+							style="width: 4em; height: 4em;"></h:graphicImage>
+					</h:commandLink>
+					<br />
+					<h:outputText value="Reenvio OTP"></h:outputText>
+				</div>
+				<div class="menuitem">
+					<h:commandLink value="" actionListener="#{initAction.lockUser()}">
+						<f:ajax disabled="false" render=":pgContainer"></f:ajax>
+						<h:graphicImage library="images" name="lockuser.png"
+							style="width: 4em; height: 4em;"></h:graphicImage>
+					</h:commandLink>
+					<br />
+					<h:outputText value="Bloquear Usuario"></h:outputText>
+				</div>
+				<div class="menuitem">
+					<h:commandLink value="" actionListener="#{initAction.callPopupOtpCode(1)}">
+						<f:ajax disabled="false"></f:ajax>
+						<h:graphicImage library="images" name="unlockuser.png"
+							style="width: 4em; height: 4em;"></h:graphicImage>
+					</h:commandLink>
+					<br />
+					<h:outputText value="Desbloquear Usuario"></h:outputText>
+				</div>
+				<div class="menuitem">
+					<h:commandLink value="" actionListener="#{initAction.callPopupOtpCode(2)}">
+						<f:ajax disabled="false"></f:ajax>
+						<h:graphicImage library="images" name="deleteuser.png"
+							style="width: 4em; height: 4em;"></h:graphicImage>
+					</h:commandLink>
+					<br />
+					<h:outputText value="Eliminar Usuario"></h:outputText>
+				</div>
+			</h:panelGroup>
+			
+			<p:dialog id="idMpCustomerDataSBI" widgetVar="mpCustomerDataSBI" 
+				modal="true" resizable="false" closable="false" header="Datos del Cliente">
+				<h:panelGrid columns="2">
+				
+					<h:outputLabel for="somIdType" value="Tipo de Documento: "></h:outputLabel>
+					<p:selectOneMenu id="somIdType" value="#{initAction.model.documentType}">
+						<f:selectItem itemLabel="Seleccione" itemValue=""></f:selectItem>
+						<f:selectItems value="#{initAction.model.idTypeList}"></f:selectItems>
+					</p:selectOneMenu>
+				
+					<h:outputLabel for="itIdNo" value="Número de Documento: "></h:outputLabel>
+					<p:inputText id="itIdNo" onkeypress="return isAlphanumericKey(event);"
+						value="#{initAction.model.documentNumber}"
+						size="40"></p:inputText>
+				</h:panelGrid>
+				<div style="display: block; width: 100%; text-align: center;">
+					<p:commandButton value="Consultar" update=":pgContainer idMpCustomerDataSBI" 
+						actionListener="#{initAction.saveIdCustomerData()}" />
+				</div>
+			</p:dialog>
+			
+			<p:dialog id="idOtpCodeMp" widgetVar="mpOtpCode" modal="true" resizable="false" closable="true" header="Código OTP">
+				<h:panelGroup layout="block" style="text-align: center;">
+				<h:panelGrid columns="2" >
+					<h:outputLabel value="Por favor, ingrese el código OTP: "></h:outputLabel>
+					<br />
+					<p:inputText value="#{initAction.model.otpCode}"></p:inputText>
+				</h:panelGrid>
+				<p:commandButton value="Aceptar" update=":pgContainer idOtpCodeMp"
+					actionListener="#{initAction.putOtpCode()}"></p:commandButton>	
+				</h:panelGroup>
+				
+			</p:dialog id="idClienteNoExiste" widgetVar>
+			
+			<p:dialog>
+				
+			</p:dialog>
+			
+			<div style="visibility: hidden;">
+				<p:commandButton id="btn_log"
+					actionListener="#{initAction.executeValidation}"
+						process="@this"
+						ajax="true"
+						update=":pgContainer :mpErrorMsg"
+					 />
+			</div>
+			<p:idleMonitor 
+				timeout="240000" onidle="closeApp()" />
+		</h:form>
+		<p:dialog id="mpErrorMsg" widgetVar="errMsg" resizable="false"
+				modal="true" header="Errores" style="background: #F6CECE;"
+				width="500" height="5%">
+				<div align="center">
+					<p:dataTable id="idErrorsTable"
+						value="#{initAction.model.errorMsgs}" var="reg">
+						<p:column width="400" style="white-space: normal">
+							<f:facet name="header">
+								<h:outputLabel value="Mensaje" />
+							</f:facet>
+							<h:outputText value="#{reg.message}" />
+						</p:column>
+					</p:dataTable>
+					<p:commandButton value="Cerrar" type="button"
+						onclick="PF('errMsg').hide();" />
+				</div>
+			</p:dialog>
+	</h:panelGroup>
+</h:body>
+</html>

@@ -1,0 +1,206 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+
+<h:head>
+	<h:outputStylesheet library="css" name="init.css" />
+	<h:outputScript library="js" name="helper.js" />
+</h:head>
+<h:body>
+	<p:ajaxStatus onstart="PF('statusDialog').show()" onsuccess="PF('statusDialog').hide()" />
+	<p:dialog modal="true" widgetVar="statusDialog" height="100px"
+		width="150px" draggable="false" closable="false" resizable="false"
+		styleClass="process_msg">
+		<h:graphicImage library="images" height="100px" width="100px"
+			name="loading.gif" />
+	</p:dialog>	
+	<h:panelGroup id="pgContainer" styleClass="container" layout="block">
+		<h:form id="boform">
+		<div id="headerDesktop"></div>
+			<div id="header">
+				<div align="right">
+					<h:panelGrid columns="7">
+
+						<h:outputLabel value="Cajero:" />
+						<h:outputText id="header_cashier"
+							value="#{sessionScope['CASHIER_IN_SESSION']}" />
+
+						<p:spacer width="10" />
+
+						<h:outputLabel value="Punto de Servicio:" />
+						<h:outputText id="header_servicepoint"
+							value="#{sessionScope['SERVICE_POINT']}" />
+
+						<p:spacer width="10" />
+
+						<h:commandButton type="button" onclick="closeApp()"
+							styleClass="boton_salir" />
+
+					</h:panelGrid>
+				</div>
+			</div>
+			<div id="reporteHeader" align="center">
+				<p:panel id="headerPrime"  style="border: none;">
+					<h:outputText value="Cliente: " />
+					<h:outputText value="#{CustomerPSEAction.model.fullName}" />
+					<h:outputText value=" " />
+					<h:outputText value="#{CustomerPSEAction.model.idType}" />
+					<h:outputText value=" " />
+					<h:outputText value="#{CustomerPSEAction.model.id}" />
+					<h:outputText value=" " />
+					<br />
+					<h:outputText value="TRANSACCIONES PSE" />
+				</p:panel>
+			</div>
+
+
+			<div id="reportFilters" align="center">
+				<h:panelGrid columns="9">
+
+					<h:outputLabel for="dateIni" value="Fecha Inicial" />
+					<p:calendar id="dateIni" pattern="dd/MM/yyyy" tabindex="8"
+						value="#{CustomerPSEAction.model.startDateFilter}" showOn="button"
+						locale="es" />
+					<p:message for="dateIni" display="icon" />
+
+
+					<h:outputLabel for="dateEnd" value="Fecha Final" />
+					<p:calendar id="dateEnd" pattern="dd/MM/yyyy" tabindex="9"
+						value="#{CustomerPSEAction.model.endDateFilter}" showOn="button"
+						locale="es" />
+					<p:message for="dateEnd" display="icon" />
+
+					<h:outputLabel for="estado" value="Estado" />
+					<p:selectOneMenu id="estado"
+						value="#{CustomerPSEAction.model.stateFilter}">
+						<f:selectItem itemValue="APROBADA" itemLabel="APROBADA"></f:selectItem>
+						<f:selectItem itemValue="ANULADA" itemLabel="ANULADA"></f:selectItem>
+						<f:selectItem itemValue="RECHAZADA" itemLabel="RECHAZADA"></f:selectItem>
+						<f:selectItem itemValue="PENDIENTE" itemLabel="PENDIENTE"></f:selectItem>
+						<f:selectItem itemValue="TODOS" itemLabel="TODOS"></f:selectItem>
+					</p:selectOneMenu>
+					<p:commandButton id="btn_log"
+					action="#{CustomerPSEAction.excetuteLoadPSEInfo}"
+					value="Consultar" update=":mpErrorMsg :boform:reportePrime"/>
+				</h:panelGrid>
+			</div>
+			
+				<p:panel id="reportePrime"  style="border: none;">
+					<div align="center">
+						<p:dataTable id="idTxTable"
+							value="#{CustomerPSEAction.model.pseList}" var="reg"
+							paginator="true" rows="10"
+							paginatorTemplate="{FirstPageLink} {PreviousPageLink} {CurrentPageReport} {NextPageLink} {LastPageLink}"
+							currentPageReportTemplate="Regs: {startRecord} a {endRecord} de {totalRecords}, (Pag: {currentPage}/{totalPages})"
+							paginatorAlwaysVisible="false" paginatorPosition="bottom"
+							emptyMessage="No se han encontrado transacciones en el sistema.">
+							<p:column style="width: 80px;">
+								<f:facet name="header">
+									<h:outputLabel value="Fecha (MM-DD-YYYY)" />
+								</f:facet>
+								<div style="width: 100%; text-align: center;">
+									<h:outputText value="#{reg.operationDae}">
+										<f:convertDateTime pattern="dd-MM-yyyy"></f:convertDateTime>
+									</h:outputText>
+								</div>
+							</p:column>
+
+							<p:column style="width: 150px;">
+								<f:facet name="header">
+									<h:outputLabel value="Tipo de Transacción" />
+								</f:facet>
+								<div style="width: 100%; text-align: left;">
+									<h:outputText value="#{reg.type}" />
+								</div>
+							</p:column>
+
+							<p:column style="width: 50px;">
+								<f:facet name="header">
+									<h:outputLabel value="Medio de Pago" />
+								</f:facet>
+								<div style="width: 100%; text-align: center;">
+									<h:outputText value="#{reg.methodOfPayment}" />
+								</div>
+							</p:column>
+
+							<p:column style="width: 90px;">
+								<f:facet name="header">
+									<h:outputLabel value="Estado" />
+								</f:facet>
+								<div style="width: 100%; text-align: center;">
+									<h:outputText value="#{reg.status}" />
+								</div>
+							</p:column>
+
+							<p:column style="width: 70px;">
+								<f:facet name="header">
+									<h:outputLabel value="Estado Notificación" />
+								</f:facet>
+								<div style="width: 100%; text-align: right;">
+									<h:outputText value="#{reg.notificationStatus}" />
+								</div>
+							</p:column>
+
+							<p:column style="width: 70px;">
+								<f:facet name="header">
+									<h:outputLabel value="Intentos Notificación" />
+								</f:facet>
+								<div style="width: 100%; text-align: left;">
+									<h:outputText value="#{reg.notificationAttempts}" />
+								</div>
+							</p:column>
+						</p:dataTable>
+					</div>
+				</p:panel>
+			
+			<p:spacer></p:spacer>
+			<div align="center">
+				<p:commandButton id="btn_back" action="INIT" value="Volver" />
+			</div>
+			<p:idleMonitor timeout="240000" onidle="closeApp()" />
+		</h:form>
+	
+	<!-- Modal para presentar errores -->
+		<p:dialog id="mpErrorMsg" widgetVar="errMsg" resizable="false" width="600"
+			modal="true" header="Notificación" style="background: #F6CECE;">
+			<div align="left">
+				<h:outputLabel value="Id de la Transacción: "
+					style="font-weight: bold;"
+					rendered="#{!(CustomerPSEAction.model.idTx eq '')}" />
+				<h:outputText value="#{CustomerPSEAction.model.idTx}"
+					rendered="#{!(CustomerPSEAction.model.idTx eq '')}" />
+				<br />
+
+				<h:outputLabel value="Fecha de la Transacción: "
+					style="font-weight: bold;"
+					rendered="#{!(CustomerPSEAction.model.idTx eq '')}" />
+				<h:outputText value="#{currentDate}"
+					rendered="#{!(CustomerPSEAction.model.idTx eq '')}">
+					<f:convertDateTime pattern="dd/MM/yyyy HH:mm" timeZone="GMT-5"
+						locale="es_CO" />
+				</h:outputText>
+
+				<p:dataTable id="idErrorsTable"
+					value="#{CustomerPSEAction.model.errorMsgs}" var="reg">
+					<p:column>
+						<f:facet name="header">
+							<h:outputLabel value="Código" />
+						</f:facet>
+						<h:outputText value="#{reg.code}" />
+					</p:column>
+					<p:column width="300" style="white-space: normal">
+						<f:facet name="header">
+							<h:outputLabel value="Mensaje" />
+						</f:facet>
+						<h:outputText value="#{reg.message}" />
+					</p:column>
+				</p:dataTable>
+			</div>
+		</p:dialog>
+		</h:panelGroup>
+</h:body>
+</html>
