@@ -242,7 +242,7 @@ public class InitAction extends ActionUtil{
 		}
 		return this.model.getLockedByAdmin();
 	}
-	
+
 	public void sendOTPSMS() {
 		try {
 			this.validateWaysOFSendingOTP();

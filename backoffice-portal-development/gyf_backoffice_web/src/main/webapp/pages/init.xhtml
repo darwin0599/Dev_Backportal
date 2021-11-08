@@ -14,6 +14,11 @@
 			document.getElementById("boform:btn_log").click();
 		};
 	</script>
+	<script>
+		window.location.reload();
+		function refresh(){
+		window.location.reload();}
+	</script>
 </h:head>
 <h:body>
 	<p:ajaxStatus onstart="PF('statusDialog').show()" onsuccess="PF('statusDialog').hide()" />
@@ -317,13 +322,22 @@ radicaciones de tarjeta crédito realizadas por el cliente consultado. -->
 					<h:outputText value="Acciones"></h:outputText>
 				</div>
 				<div class="menuitem">
-					<h:commandLink value="" actionListener="#{initAction.sendOTPSMS()}" >
+					<h:commandLink value="" actionListener="#{init.refresh()}" >
 						<f:ajax disabled="false"></f:ajax>
 						<h:graphicImage library="images" name="forwardphone.png"
 							style="width: 4em; height: 4em;"></h:graphicImage>
 					</h:commandLink>
 					<br />
-					<h:outputText value="Reenvio OTP"></h:outputText>
+					<h:outputText value="Refrescar Pantalla"></h:outputText>
+				</div>
+				<div class="menuitem">
+					<h:commandLink value="" href="" >
+						<f:ajax disabled="false"></f:ajax>
+						<h:graphicImage library="images" name="forwardphone.png"
+										style="width: 4em; height: 4em;"></h:graphicImage>
+					</h:commandLink>
+					<br />
+					<h:outputText value="Actualización de Datos"></h:outputText>
 				</div>
 				<div class="menuitem">
 					<h:commandLink value="" actionListener="#{initAction.sendOTPMail()}">
@@ -430,5 +444,5 @@ radicaciones de tarjeta crédito realizadas por el cliente consultado. -->
 				</div>
 			</p:dialog>
 	</h:panelGroup>
-</h:body>
+</h:body>}
 </html>
